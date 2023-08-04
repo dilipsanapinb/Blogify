@@ -60,18 +60,18 @@ Bogify is blogging app which help people to post their blogs online and other pe
                         }
                   }
 
-    Response: Registration is successfull
-                   {
-                    "message": "Registration is successful",
-                    "user": {
-                        "id": 12,
-                        "name": "Indu Sanap",
-                        "email": "indu@gmail.com",
-                        "password": "$2b$05$oEO4JVb0eTyF6o37WUjTB.5i3gG7Z9eJRJ78DB0mFIpURkUdE6S8G",
-                        "updatedAt": "2023-08-04T15:42:19.933Z",
-                        "createdAt": "2023-08-04T15:42:19.933Z"
-                    }
-                }
+            Response: Registration is successfull
+                        {
+                            "message": "Registration is successful",
+                            "user": {
+                                "id": 12,
+                                "name": "Indu Sanap",
+                                "email": "indu@gmail.com",
+                                "password": "$2b$05$oEO4JVb0eTyF6o37WUjTB.5i3gG7Z9eJRJ78DB0mFIpURkUdE6S8G",
+                                "updatedAt": "2023-08-04T15:42:19.933Z",
+                                "createdAt": "2023-08-04T15:42:19.933Z"
+                            }
+                        }
 
 #### Login
 - POST /user/api/login
