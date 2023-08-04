@@ -90,3 +90,13 @@ Bogify is blogging app which help people to post their blogs online and other pe
 - GET /user/api/users
 - Response: Get the all users data in array
 
+## Posts Routes
+
+#### Create a post
+
+#### Get All posts
+
+#### Edit All Posts
+
+#### Delete posts
+
