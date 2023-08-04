@@ -5,6 +5,9 @@ const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize("blogify", "root", "Dilip@0123", {
   host: "localhost",
   dialect: "mysql",
+//   dialectOptions: {
+//     lowercase: false, // Make sure lowercase is set to false
+//   },
 });
 
 sequelize.authenticate().then(() => {
