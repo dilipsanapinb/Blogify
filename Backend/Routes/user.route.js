@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sequelize = require("../Config/Db");
+require('dotenv').config();
 const User = require("../Models/user.model");
 
 const userRouter = express.Router();
@@ -54,7 +55,7 @@ userRouter.post('/api/login', async(req, res) => {
         let hashpass = user.password;
         bcrypt.compare(password, hashpass, async function (err, result) {
             if (result) {
-                var token = jwt.sign({ userID: user.id }, "masai");
+                var token = jwt.sign({ userID: user.id }, process.env.secrete);
                 res.send({ "msg": "Login is Successfull", "token": token })
             } else {
                 res.status(401).send("Wrong Credential's");

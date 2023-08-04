@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const sequelize = require("./Config/Db");
-const { userRouter } =require('./Routes/user.route')
+const { userRouter } = require('./Routes/user.route');
+const authenticate=require('./Middlewares/authentication.middleware')
 const PORT = process.env.port || 5000;
 
 app.use(express.json());
@@ -12,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/user', userRouter);
+
 
 app.listen(PORT, async () => {
   await sequelize;
