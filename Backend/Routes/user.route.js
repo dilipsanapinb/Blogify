@@ -55,7 +55,7 @@ userRouter.post('/api/login', async(req, res) => {
         let hashpass = user.password;
         bcrypt.compare(password, hashpass, async function (err, result) {
             if (result) {
-                var token = jwt.sign({ userID: user.id }, process.env.secrete);
+                var token = jwt.sign({ userId: user.id }, process.env.secrete);
                 res.send({ "msg": "Login is Successfull", "token": token })
             } else {
                 res.status(401).send("Wrong Credential's");
@@ -69,5 +69,16 @@ userRouter.post('/api/login', async(req, res) => {
     }
     
 });
+
+// getAll users
+userRouter.get('/api/users', async(req, res) => {
+    try {
+        const users =await User.findAll();
+        res.status(200).send({message:"All users data","Uses":users})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Something went wrong on the server at getting the all users" });
+    }
+})
 
 module.exports = { userRouter };
