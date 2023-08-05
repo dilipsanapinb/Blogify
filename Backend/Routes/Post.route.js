@@ -1,5 +1,6 @@
 const express = require("express");
 const { sequelize, users, posts, comments } = require("../models");
+const {Op}=require('sequelize')
 const authenticate = require("../Middlewares/authentication.middleware");
 const postRouter = express.Router();
 
@@ -22,8 +23,12 @@ postRouter.post("/api/create", authenticate, async (req, res) => {
 // get all posts
 postRouter.get("/api/posts", async (req, res) => {
   try {
-    const posts = await posts.findAll();
-    res.status(200).send({ message: "All posts Data", AllPosts: posts });
+    users.hasMany(posts, { foreignKey: 'userId' });
+    posts.belongsTo(users,{foreignKey:'userId'})
+    const allposts = await posts.findAll({
+      include:[users]
+    });
+    res.status(200).send({ message: "All posts Data", AllPosts: allposts });
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -49,6 +54,30 @@ postRouter.get("/api/post/:id", async (req, res) => {
     });
   }
 });
+
+// search the post by title
+
+postRouter.get('/api/searchposts/:search', async(req, res) => {
+  try {
+    users.hasMany(posts, { foreignKey: "userId" });
+    posts.belongsTo(users, { foreignKey: "userId" });
+    const searchReasult = await posts.findAll({
+      include: [users],
+      where: {
+        title: {
+          [Op.like]:`%${req.params.search}%`,
+        },
+      }
+    });
+    res.status(200).send({ message: "search result", AllPosts: searchReasult });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({
+      message: "Something went wrong at getting a post by id",
+      error: error.message,
+    });
+  }
+})
 
 // edit a post
 postRouter.patch("/api/post/:id", authenticate, async (req, res) => {
