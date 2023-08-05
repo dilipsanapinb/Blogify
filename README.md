@@ -186,3 +186,84 @@ Bogify is blogging app which help people to post their blogs online and other pe
                             "message": "Post deleted successfully"
                         }
 
+
+## Comments Route
+
+#### Create comment
+- POST  /comment/api/comments
+- Protected route
+ 
+
+                        Request:{
+                            "postId":4,
+                            "comment":"have a momment"
+                        }
+
+
+                        Response:{
+                                "message": "Comment created successfully",
+                                "comment": {
+                                    "createdAt": "2023-08-05T07:51:07.411Z",
+                                    "id": 1,
+                                    "comment": "have a momment",
+                                    "postId": 4,
+                                    "userId": 12,
+                                    "updatedAt": "2023-08-05T07:51:07.412Z"
+                                    }
+                                }
+
+#### Get All comments by Post
+- GET  comment//api/commentsonpost/:postId
+                         
+                         Response:{
+                                "message": "All comments for the post",
+                                "comments": [
+                                    {
+                                        "id": 1,
+                                        "comment": "have a momment",
+                                        "createdAt": "2023-08-05T07:51:07.000Z",
+                                        "userId": 12,
+                                        "postId": 4,
+                                        "updatedAt": "2023-08-05T07:51:07.000Z"
+                                    }
+                                ]
+                            }
+
+#### Get comment by id
+- GET  comment/api/comments/:commentId
+
+                            
+                            Response:{
+                                
+                                "message": "Comment found",
+                                "comment": {
+                                    "id": 1,
+                                    "comment": "have a momment",
+                                    "createdAt": "2023-08-05T07:51:07.000Z",
+                                    "userId": 12,
+                                    "postId": 4,
+                                    "updatedAt": "2023-08-05T07:51:07.000Z"
+                                }
+                            }
+
+#### Update the comment
+- PUT comment/api/comments/:commentId
+                                
+                                Response:{
+                                        "message": "Comment updated successfully",
+                                        "UpdatedCommetn": {
+                                            "id": 1,
+                                            "comment": "updated comment",
+                                            "createdAt": "2023-08-05T07:51:07.000Z",
+                                            "userId": 12,
+                                            "postId": 4,
+                                            "updatedAt": "2023-08-05T08:09:03.000Z"
+                                        }
+                                }
+#### Delete the comment
+- DELETE comment/api/comments/:commentId
+
+                                Response:{
+                                    "message": "Comment deleted successfully"
+                                }
+
