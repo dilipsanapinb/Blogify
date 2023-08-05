@@ -21,5 +21,18 @@ commentRouter.post("/api/comments", authenticate, async (req, res) => {
     }
 });
 
+// Get all comments for a specific post by postId
+commentRouter.get('/api/commentsonpost/:postId', async (req, res) => {
+    try {
+        const postId = req.params.postId;
+        const comments = await Comment.findAll({ where: { postId } });
+        res.status(200).json({ message: "All comments for the post", comments });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to get comments for the post", error: error.message });
+    }
+});
+
+
 
 module.exports = commentRouter;
