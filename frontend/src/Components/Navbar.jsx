@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, InputGroup } from '@chakra-ui/react';
 import React from 'react'
 import { Link } from 'react-router-dom';
 
@@ -34,6 +34,11 @@ const Navbar = () => {
                 </Flex>
 
                 {/* Middlepart of navbar */}
+                <Flex className='navbar-middle'
+                    alignItems={'center'}>
+                    <InputGroup maxW={'400px'} mar="2rem">
+                    </InputGroup>
+                </Flex>
                 {/* Right part of  Navabar */}
                 
             </Flex>
