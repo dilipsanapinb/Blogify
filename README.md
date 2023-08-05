@@ -22,6 +22,12 @@ Bogify is blogging app which help people to post their blogs online and other pe
 - title
 - content
 - timestamp
+
+### Comments
+- commentId(primary key)
+- postId(foreign key)
+- userId(foreign key)
+- comment
 # Entity Relation Diagram
 <img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/ER%20Diagram.png"></img>
 
