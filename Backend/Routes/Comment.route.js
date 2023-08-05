@@ -24,9 +24,15 @@ commentRouter.post("/api/comments", authenticate, async (req, res) => {
 // Get all comments for a specific post by postId
 commentRouter.get("/api/commentsonpost/:postId", async (req, res) => {
   try {
+    comments.belongsTo(users, { foreignKey: 'userid' });
+    users.hasMany(comments, { foreignKey: 'userId' });
+    comments.belongsTo(posts, { foreignKey: 'postId' });
+    posts.hasMany(comments,{foreignKey:'postId'})
     const postId = req.params.postId;
-    const comments = await comments.findAll({ where: { postId } });
-    res.status(200).json({ message: "All comments for the post", comments });
+    const allcomments = await comments.findAll({
+      where: { postId },
+    include:[posts]});
+    res.status(200).json({ message: "All comments for the post", allcomments });
   } catch (error) {
     console.log(error);
     res
