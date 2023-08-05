@@ -28,7 +28,6 @@ app.get("/", (req, res) => {
 app.use(errorHandler);
 app.use('/user', userRouter);
 app.use('/post', postRouter);
-app.use(authenticate)
 app.use('/comment',commentRouter)
 
 
