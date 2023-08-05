@@ -46,11 +46,39 @@ postRouter.get('/api/post/:id', async (req, res) => {
         console.log(error);
         res
             .status(500)
-            .send({ message: "Something went wrong at getting a post by id", 'error': error.message });
+            .send({
+                message: "Something went wrong at getting a post by id",
+                error: error.message,
+            });
     }
 });
 
 // edit a post
+postRouter.patch('/api/post/:id', authenticate, async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const updates = req.body;
+        const getPost = await Post.findOne({ where: { id: postId } });
+        if (!getPost) {
+            return res.status(404).json({ message: "Post not found" })
+        }
+
+        await getPost.update(updates);
+
+        const updatedPost = await Post.findOne({ where: { id: postId } });
+        res.status(200).json({ message: "Post updated successfully", post: updatedPost })
+    } catch (error) {
+        console.log(error);
+        res
+            .status(500)
+            .json({
+                message: "Something went wrong at updating a post",
+                error: error.message,
+            });
+    }
+});
+
+// delete a post
 
 
 module.exports = postRouter;
