@@ -48,6 +48,24 @@ commentRouter.get('/api/comments/:commentId', async (req, res) => {
     }
 });
 
+// Update a comment by commentId
+commentRouter.put('/api/comments/:commentId', authenticate, async (req, res) => {
+    try {
+        const commentId = req.params.commentId;
+        const updates= req.body;
 
+        const getComment = await Comment.findOne({ where: { id: commentId } });
+        if (!getComment) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+        await getComment.update(updates)
+        const updatedComment=await Comment.findOne({where:{id:commentId}})
+        
+        res.status(200).json({ message: "Comment updated successfully" ,"UpdatedCommetn":updatedComment});
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to update the comment", error: error.message });
+    }
+});
 
 module.exports = commentRouter;
