@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("users", {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
+  return User;
+=======
 const { DataTypes } = require("sequelize");
 const sequelize = require("../Config/Db");
 
@@ -35,7 +54,5 @@ const syncTableOnce = async () => {
       console.log("Failed to create table");
     }
   }
+>>>>>>> main
 };
-syncTableOnce();
-
-module.exports = User;

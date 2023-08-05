@@ -1,11 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../Config/Db");
-const User = require("../Models/user.model");
-const Post = require("../Models/posts.model");
+const User = require("./user.model");
+const Post = require("./posts.model");
 
-const Comment = sequelize.define(
-  "Comment",
-  {
+module.exports = (sequelize, DataTypes) => {
+  const Comment = sequelize.define("comments", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -23,45 +20,18 @@ const Comment = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: User,
+        model: "users",
         key: "id",
       },
-      onUpdate: "CASCADE", // Set to "CASCADE" to update the Comment's userId when User's id changes
     },
     postId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: Post,
+        model:"posts",
         key: "id",
       },
-      onUpdate: "CASCADE", // Set to "CASCADE" to update the Comment's postId when Post's id changes
     },
-  },
-  {
-    underscored: true,
-    associate: (models) => {
-      Comment.belongsTo(models.User, { foreignKey: "userId" });
-      Comment.belongsTo(models.Post, { foreignKey: "postId" });
-    },
-  }
-);
-
-let isTableSynced = false;
-
-const syncTableOnce = async () => {
-  if (!isTableSynced) {
-    try {
-      await sequelize.sync();
-      console.log("Table created successfully");
-      isTableSynced = true;
-    } catch (error) {
-      console.log(error.message);
-      console.log("Failed to create table");
-    }
-  }
+  });
+  return Comment;
 };
-
-syncTableOnce();
-
-module.exports = Comment;
