@@ -139,9 +139,10 @@ Bogify is blogging app which help people to post their blogs online and other pe
 
 #### Get a post by id
 - GET /post/api/post/:id
+
                         Response:{
                             "message": "Get a post by id is successfull",
-                        "post": {
+                            "post": {
                             "id": 2,
                             "title": "Blossoming the Spring",
                             "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
