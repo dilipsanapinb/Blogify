@@ -155,6 +155,7 @@ Bogify is blogging app which help people to post their blogs online and other pe
 #### Edit Post
 - PATCH /post/api/post/:id
 - Protected route
+
                         Request:{
                             // data we need to update
                             }
