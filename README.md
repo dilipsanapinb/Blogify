@@ -93,10 +93,84 @@ Bogify is blogging app which help people to post their blogs online and other pe
 ## Posts Routes
 
 #### Create a post
+- POST /post/api/create
+                    
+                    Request:{
+                        "title":"Blossoming the Summer",
+                        "content":"The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters."
+                        }
+
+                    Response:{
+                        "message": "New post created",
+                        "Post": {
+                            "createdAt": "2023-08-04T16:08:02.624Z",
+                            "id": 3,
+                            "title": "Blossoming the Summer",
+                            "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
+                            "userId": 11,
+                            "updatedAt": "2023-08-04T16:08:02.624Z"
+                            }
+                        }
 
 #### Get All posts
+- GET /post/api/posts
+                       Response:{
+                         "message": "All posts Data",
+                    "AllPosts": [
+                        {
+                            "id": 1,
+                            "title": "Blossoming the Spring",
+                            "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
+                            "createdAt": "2023-08-04T16:06:49.000Z",
+                            "userId": 11,
+                            "updatedAt": "2023-08-04T16:06:49.000Z"
+                        },
+                        {
+                            "id": 2,
+                            "title": "Blossoming the Spring",
+                            "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
+                            "createdAt": "2023-08-04T16:07:41.000Z",
+                            "userId": 11,
+                            "updatedAt": "2023-08-04T16:07:41.000Z"
+                        }
+                        ]
+                       }
 
+#### Get a post by id
+- GET /post/api/post/:id
+                        Response:{
+                            "message": "Get a post by id is successfull",
+                        "post": {
+                            "id": 2,
+                            "title": "Blossoming the Spring",
+                            "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
+                            "createdAt": "2023-08-04T16:07:41.000Z",
+                            "userId": 11,
+                            "updatedAt": "2023-08-04T16:07:41.000Z"
+    }
+                        }
 #### Edit All Posts
+- PATCH /post/api/post/:id
+                        Request:{
+                            // data we need to update
+                        }
+
+                        Response:{
+                             "message": "Post updated successfully",
+                        "post": {
+                            "id": 1,
+                            "title": "Updated post title",
+                            "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
+                            "createdAt": "2023-08-04T16:06:49.000Z",
+                            "userId": 11,
+                            "updatedAt": "2023-08-05T05:10:52.000Z"
+                        }
+                        }
 
 #### Delete posts
+- DELETE /post/api/post/:id
+                        
+                        Response:{
+                            "message": "Post deleted successfully"
+                        }
 
