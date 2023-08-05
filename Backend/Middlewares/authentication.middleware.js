@@ -17,7 +17,7 @@ const authenticate = (req, res, next) => {
             if (!userId) {
                 return res.status(401).send({message:"User ID not foind in the token"})
             }
-            req.user = { userId }
+            req.body.userId = userId;
             next()
         });
     } catch (error) {
