@@ -27,12 +27,27 @@ postRouter.get('/api/posts', async (req, res) => {
     } catch (error) {
         console.log(error);
         res
-            .status(500)
-            .send({ message: "Something went wrong at getting the all post" });
+          .status(500)
+          .send({
+            message: "Something went wrong at getting the all post",
+            error: error.message,
+          });
     }
 });
 
 // get a post by id
+postRouter.get('/api/post/:id', async(req, res) => {
+    try {
+        const id = req.params.id;
+        const getPost = await Post.findOne({ where: { id } });
+        res.status(200).send({message:"Get a post by id is successfull",'post':getPost})
 
+    } catch (error) {
+        console.log(error);
+        res
+          .status(500)
+          .send({ message: "Something went wrong at getting a post by id",'error':error.message });
+    }
+})
 
 module.exports = postRouter;
