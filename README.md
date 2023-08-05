@@ -94,6 +94,7 @@ Bogify is blogging app which help people to post their blogs online and other pe
 
 #### Create a post
 - POST /post/api/create
+- Protected route
                     
                     Request:{
                         "title":"Blossoming the Summer",
@@ -151,9 +152,9 @@ Bogify is blogging app which help people to post their blogs online and other pe
                             "updatedAt": "2023-08-04T16:07:41.000Z"
                             }
                         }
-#### Edit All Posts
+#### Edit Post
 - PATCH /post/api/post/:id
-
+- Protected route
                         Request:{
                             // data we need to update
                             }
@@ -170,8 +171,9 @@ Bogify is blogging app which help people to post their blogs online and other pe
                         }
                         }
 
-#### Delete posts
+#### Delete post
 - DELETE /post/api/post/:id
+- Protected route
                         
                         Response:{
                             "message": "Post deleted successfully"
