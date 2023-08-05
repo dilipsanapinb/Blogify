@@ -79,6 +79,25 @@ postRouter.patch('/api/post/:id', authenticate, async (req, res) => {
 });
 
 // delete a post
+postRouter.delete('/api/post/:id',async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const post=await Post.findOne({ where: { id: postId } });
+        if (!post) {
+            return res.status(404).json({ message: "Post with id not found" });
+        }
+        await post.destroy();
+
+        res.status(200).json({message:"Post deleted successfully"})
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Something went wrong at deleting a post",
+            error: error.message,
+        });
+    }
+})
 
 
 module.exports = postRouter;
