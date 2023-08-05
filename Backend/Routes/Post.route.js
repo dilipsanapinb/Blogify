@@ -79,7 +79,7 @@ postRouter.patch('/api/post/:id', authenticate, async (req, res) => {
 });
 
 // delete a post
-postRouter.delete('/api/post/:id',async (req, res) => {
+postRouter.delete('/api/post/:id',authenticate,async (req, res) => {
     try {
         const postId = req.params.id;
         const post=await Post.findOne({ where: { id: postId } });

@@ -8,6 +8,8 @@ const { userRouter } = require('./Routes/user.route');
 const authenticate = require('./Middlewares/authentication.middleware');
 const errorHandler=require('./Middlewares/errorhandler.middleware')
 const postRouter = require('./Routes/Post.route');
+const commentRoute = require("./Routes/Comment.route");
+const commentRouter = require("./Routes/Comment.route");
 
 // port
 const PORT = process.env.port || 5000;
@@ -25,13 +27,15 @@ app.get("/", (req, res) => {
 // Routes
 app.use(errorHandler);
 app.use('/user', userRouter);
-app.use('/post', postRouter)
+app.use('/post', postRouter);
+app.use(authenticate)
+app.use('/comment',commentRouter)
 
 
 
 
 app.listen(PORT, async () => {
-  await sequelize;
+    await sequelize;
 
-  console.log(`Server is running on port: ${PORT}`);
+    console.log(`Server is running on port: ${PORT}`);
 });
