@@ -114,26 +114,27 @@ Bogify is blogging app which help people to post their blogs online and other pe
 
 #### Get All posts
 - GET /post/api/posts
+
                        Response:{
-                         "message": "All posts Data",
-                    "AllPosts": [
-                        {
+                            "message": "All posts Data",
+                            "AllPosts": [
+                            {
                             "id": 1,
                             "title": "Blossoming the Spring",
                             "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
                             "createdAt": "2023-08-04T16:06:49.000Z",
                             "userId": 11,
                             "updatedAt": "2023-08-04T16:06:49.000Z"
-                        },
-                        {
+                            },
+                            {
                             "id": 2,
                             "title": "Blossoming the Spring",
                             "content": "The spring bloom is a strong increase in phytoplankton abundance (i.e. stock) that typically occurs in the early spring and lasts until late spring or early summer. This seasonal event is characteristic of temperate North Atlantic, sub-polar, and coastal waters.",
                             "createdAt": "2023-08-04T16:07:41.000Z",
                             "userId": 11,
                             "updatedAt": "2023-08-04T16:07:41.000Z"
-                        }
-                        ]
+                            } 
+                            ]
                        }
 
 #### Get a post by id
@@ -147,13 +148,14 @@ Bogify is blogging app which help people to post their blogs online and other pe
                             "createdAt": "2023-08-04T16:07:41.000Z",
                             "userId": 11,
                             "updatedAt": "2023-08-04T16:07:41.000Z"
-    }
+                            }
                         }
 #### Edit All Posts
 - PATCH /post/api/post/:id
+
                         Request:{
                             // data we need to update
-                        }
+                            }
 
                         Response:{
                              "message": "Post updated successfully",
