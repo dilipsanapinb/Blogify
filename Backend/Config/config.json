@@ -1,15 +1,9 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
     "password":"Dilip@0123",
     "database": "blogify",
     "host": "localhost",
-=======
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
->>>>>>> main
     "dialect": "mysql"
   },
   "test": {

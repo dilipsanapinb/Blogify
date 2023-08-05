@@ -15,11 +15,7 @@ app.use(express.json());
 
 // Basic route
 app.get("/", (req, res) => {
-<<<<<<< HEAD
-  res.send("Welcome to the Blogify App:Express Yourself");
-=======
-    res.status(200).json({ message:"Welcome to the Blogify App:Express Yourself"});
->>>>>>> main
+    res.status(200).json({ "message":"Welcome to the Blogify App:Express Yourself"});
 });
 
 // Routes
