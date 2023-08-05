@@ -33,6 +33,21 @@ commentRouter.get('/api/commentsonpost/:postId', async (req, res) => {
     }
 });
 
+// Get a specific comment by commentId
+commentRouter.get('/api/comments/:commentId', async (req, res) => {
+    try {
+        const commentId = req.params.commentId;
+        const comment = await Comment.findOne({ where: { id: commentId } });
+        if (!comment) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+        res.status(200).json({ message: "Comment found", comment });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Failed to get the comment", error: error.message });
+    }
+});
+
 
 
 module.exports = commentRouter;
