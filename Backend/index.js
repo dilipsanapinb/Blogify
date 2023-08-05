@@ -14,7 +14,6 @@ const PORT = process.env.port || 5000;
 
 
 // Middlewares
-app.use(errorHandler)
 app.use(express.json());
 
 
@@ -24,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-
+app.use(errorHandler);
 app.use('/user', userRouter);
 app.use('/post', postRouter)
 
