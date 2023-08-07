@@ -7,14 +7,21 @@ import { Link } from 'react-router-dom';
 import { useToast } from "@chakra-ui/toast";
 const BlogsPage = () => {
   const [posts, setPosts] = useState([]);
-  const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [commentInputs, setCommentInputs] = useState({});
+  const [isLoadingStates, setIsLoadingStates] = useState({});
   const toast = useToast();
+
+
+
+  // Updated handleAddComment function
+
+
    useEffect(() => {
     // Function to fetch posts from the API
     const fetchPosts = async () => {
       try {
-        const response = await fetch('http://16.16.213.101:5000/post/api/posts');
+        const response = await fetch('http://13.53.131.66:5000/post/api/posts');
         const data = await response.json();
         const result = data.AllPosts;
         // console.log(result);
@@ -41,6 +48,8 @@ const BlogsPage = () => {
     fetchPosts();
    }, []); 
   
+  
+  
   // Function to format date and time (e.g., "7 August, 2023, 5:51:10 PM")
   const formatDateTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
@@ -55,55 +64,66 @@ const BlogsPage = () => {
     return dateTime.toLocaleString(undefined, options);
   };
 
-  
-  const token = localStorage.getItem('userInfo');
-  // console.log(token);
-  const handleAddComment = async(postId) => {
-    setIsLoading(true);
-console.log(postId);
+  // New function to handle input change for individual comment
+  const handleCommentInputChange = (postId, commentContent) => {
+    setCommentInputs((prevInputs) => ({
+      ...prevInputs,
+      [postId]: commentContent,
+    }));
+  };
+
+  const handleAddComment = async (postId) => {
+    if (isLoadingStates[postId]) return;
+    setIsLoadingStates((prevStates) => ({
+      ...prevStates,
+      [postId]: true,
+    }));
+    const commentContent = commentInputs[postId];
+    console.log(postId);
+
     try {
       const commentObj = {
         postId: postId,
-        comment:newComment
-      }
-      const response = await fetch('http://16.16.213.101:5000/comment/api/comments', {
-        method: "POST",
+        comment: commentContent,
+      };
+      const response = await fetch('http://13.53.131.66:5000/comment/api/comments', {
+        method: 'POST',
         headers: {
-          'Content-Type': "application/json",
-          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          // 'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify(commentObj)
+        body: JSON.stringify(commentObj),
       });
       if (response.ok) {
         let data = await response.json();
         console.log(data);
-        
+
         const updatedPost = posts.map((post) => {
           if (post.id === postId) {
             return {
               ...post,
-              comment: [...post.comments, response.data]
-            }
+              comments: [...post.comments, data], // Assuming the response contains the created comment data
+            };
           }
           return post;
         });
         setPosts(updatedPost);
-        setNewComment('')
+        setCommentInputs((prevInputs) => ({
+          ...prevInputs,
+          [postId]: '', // Clear the comment input after adding the comment
+        }));
+      } else {
+        console.log('Somethin went wrong at blogpage');
       }
-
-      // If the comment added successfull
     } catch (error) {
-      toast({
-                title: "Error occurred at adding the comment!",
-                description: error.response?.data?.message || "Something went wrong",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            });
+      // Handle error
+      console.log(error.message);
     }
-    setIsLoading(false);
-  }
+    setIsLoadingStates((prevStates) => ({
+      ...prevStates,
+      [postId]: false, // Reset loading state after handling the comment addition
+    }));
+  };
 
   return (
     <div>
@@ -132,7 +152,6 @@ console.log(postId);
         </Button>
       </Link>
 </Box>
-      
           {/*  */}
           {/* SimpleGrid with posts */}
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} spacing={6}>
@@ -144,7 +163,7 @@ console.log(postId);
             <Text fontSize="sm" color="gray.500" mb={2}>
               {post.formattedCreatedAt}
             </Text>
-            <Text>{post.content}</Text>
+            <Text className="truncate">{post.content}</Text>
 
             {/* Create a commetn */}
             <VStack
@@ -166,25 +185,27 @@ console.log(postId);
                   </Text>
                 </Box>
               ))}
-            </VStack>
+            
 
             {/* adding a comment */}
             <Input
-              placeholder='Add a commetn...'
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              mt={4}
-              size='sm'
-            />
-            
-            <Button
-              colorScheme='blue'
-              size='sm'
-              mt={2}
-              onClick={() => handleAddComment(post.id)} isLoading={isLoading}>
-              Add Comment
-          </Button>
+        placeholder='Add a comment...'
+        value={commentInputs[post.id] || ''} // Use individual comment input state
+        onChange={(e) => handleCommentInputChange(post.id, e.target.value)}
+        mt={4}
+        size='sm'
+      />
+              <Button colorScheme='blue' size='sm' mt={2} onClick={() => handleAddComment(post.id)}
+                isLoading={setIsLoadingStates[post.id]}>
+        Add Comment
+      </Button>
+              </VStack>
             {/*  */}
+            <Button
+            s={Link} to={`/post/${post.id}`} mt={4} size="sm" colorScheme="teal"
+            >
+              Read More
+            </Button>
           </Box>
         ))}
       </SimpleGrid>

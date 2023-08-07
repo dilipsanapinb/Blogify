@@ -35,7 +35,7 @@ const Signup = () => {
                 email: email,
                 password:password
             }
-            let res = await fetch('http://16.16.213.101:5000/user/api/register', {
+            let res = await fetch('http://13.53.131.66:5000/user/api/register', {
                 method:"POST",
                 headers: {
                     "Content-Type":"application/json"
