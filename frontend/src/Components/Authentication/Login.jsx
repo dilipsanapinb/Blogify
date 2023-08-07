@@ -46,7 +46,7 @@ const Login = () => {
             };
 
             const { data } = await axios.post(
-                "http://16.16.213.101:5000/user/api/login",
+                "http://13.53.131.66:5000/user/api/login",
                 { email, password },
                 config
             );
@@ -58,7 +58,9 @@ const Login = () => {
                 isClosable: true,
                 position: "bottom",
             });
-            localStorage.setItem("userInfo", JSON.stringify(data.token));
+            const token = data.token;
+            // console.log(token);
+            localStorage.setItem("userInfo", JSON.stringify(token));
             setLoading(false);
             navigate("/blogs");
         } catch (error) {
