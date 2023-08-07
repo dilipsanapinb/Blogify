@@ -1,0 +1,17 @@
+.sticky-nav {
+  height: 60px; /* Adjust this height to your desired navbar height */
+}
+
+.static-nav {
+  height: auto;
+}
+
+.static-nav .navbar-container {
+  position: static;
+}
+
+.sticky-nav .navbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
