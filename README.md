@@ -8,7 +8,9 @@ Bogify is blogging app which help people to post their blogs online and other pe
 - React.js
 - GitHub
 - Postman
-- 
+
+#### blogifybackend repo link
+- https://github.com/dilipsanapinb/blogifybackend
 # Entities
 ### User
 - userId(Primary key)
