@@ -1,23 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password":"Dilip@0123",
-    "database": "blogify",
-    "host": "localhost",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "admin",
+    "password": "12345678",
+    "database": "blogifydata",
+    "host": "database-3.ccrqo0yqvxco.eu-north-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
