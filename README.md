@@ -267,3 +267,8 @@ Bogify is blogging app which help people to post their blogs online and other pe
                                     "message": "Comment deleted successfully"
                                 }
 
+
+# Screenshots of pages
+### Langing page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/Landing%20page.png" alt="landing page"/>
+
