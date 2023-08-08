@@ -272,3 +272,23 @@ Bogify is blogging app which help people to post their blogs online and other pe
 ### Langing page
 <img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/Landing%20page.png" alt="landing page"/>
 
+### Sign in page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/SignInpage.png" alt="Sign in page">
+
+### Sign up page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/SignUp%20page.png" alt="Sign up page">
+
+### Posts page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/Posts%20Page.png" alt="Posts page">
+
+### Read more page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/Read%20more%20page.png" alt="Read more page">
+
+### Create post  page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/create%20post.png" alt="Create post  page">
+
+### Edit post page
+<img src="https://github.com/dilipsanapinb/Blogify/blob/main/Images/Edit%20post%20page.png" alt="Edit post page">
+
+
+
