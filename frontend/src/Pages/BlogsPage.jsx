@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './BlogPost.css'
 import { Box, Heading, Text, List, ListItem, Divider, SimpleGrid, Button, VStack, Input } from '@chakra-ui/react';
 import Navbar from '../Components/Navbar/Navbar'
 import Footer from '../Components/Footer/Footer'
@@ -126,97 +126,92 @@ const BlogsPage = () => {
   };
 
   return (
-    <div>
-      <Navbar/>
-      <div>
+    <div className="posts-container">
+      {/* Navbar */}
+      <nav>
+        <Navbar/>
+      </nav>
+
+       <div className="content">
         <Box p={4}>
-      <Heading as="h2" size="xl" mb={4}>
-        All Posts
-      </Heading>
+          <Heading as="h3" size="l" mb={4}>
+            All Posts
+          </Heading>
 
-      {/* create post button */}
-          <Box
-            textAlign={'roght'}
-            mb={4}
-          >
-            <Link
-      to="/create-post"
-      >
-        <Button
-          colorScheme='blue'
-          size={'sm'}
-              mb={4}
-              position={'right'}
-        >
-          Create Post
-        </Button>
-      </Link>
-</Box>
-          {/*  */}
-          {/* SimpleGrid with posts */}
-      <SimpleGrid columns={{ sm: 1, md: 2, lg: 4 }} spacing={6}>
-        {posts.map((post) => (
-          <Box key={post.id} bg="gray.100" p={4} borderRadius="md">
-            <Heading as="h3" size="lg" mb={2}>
-              {post.title}
-            </Heading>
-            <Text fontSize="sm" color="gray.500" mb={2}>
-              {post.formattedCreatedAt}
-            </Text>
-            <Text className="truncate">{post.content}</Text>
-
-            {/* Create a commetn */}
-            <VStack
-              spacing={2}
-              align={'stretch'}
-            >
-              {post.comments?.map((comment) => (
-                // individual comment
-                <Box
-                  key={comment.id}
-                  p={2}
-                  bg={'gray.200'}
-                  borderRadius={'md'}
-                >
-                  <Text
-                  fontsize='sm'
-                  >
-                    {comment.content}
-                  </Text>
-                </Box>
-              ))}
-            
-
-            {/* adding a comment */}
-            <Input
-        placeholder='Add a comment...'
-        value={commentInputs[post.id] || ''} // Use individual comment input state
-        onChange={(e) => handleCommentInputChange(post.id, e.target.value)}
-        mt={4}
-        size='sm'
-      />
-              <Button colorScheme='blue' size='sm' mt={2} onClick={() => handleAddComment(post.id)}
-                isLoading={setIsLoadingStates[post.id]}>
-        Add Comment
-      </Button>
-              </VStack>
-            {/*  */}
-            <Button
-            s={Link} to={`/post/${post.id}`} mt={4} size="sm" colorScheme="teal"
-            >
-              Read More
-            </Button>
+          {/* Create post button */}
+          <Box textAlign={'right'} mb={4}>
+            <Link to="/create-post">
+              <Button
+                colorScheme="blue"
+                size="sm"
+                mb={4}
+                position="right"
+              >
+                Create Post
+              </Button>
+            </Link>
           </Box>
-        ))}
-      </SimpleGrid>
-    </Box>
-      </div>
-      {/* Footer */}
-    <Footer/>
-    </div>
 
-    
-  )
+          {/* SimpleGrid with posts */}
+          <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={6}>
+            {posts.map((post) => (
+              <Box
+                key={post.id}
+                bg="gray.100"
+                p={4}
+                borderRadius="md"
+                height="400px" 
+                overflow="hidden" 
+                display="flex" 
+            flexDirection="column" 
+            justifyContent="space-between" 
+              >
+                <Heading as="h3" size="lg" mb={2}>
+                  {post.title}
+                </Heading>
+                <Text fontSize="sm" color="gray.500" mb={2}>
+                  {post.formattedCreatedAt}
+                </Text>
+                <Text className="truncate">
+                  {post.content} 
+                </Text>
+
+                {/* Comments section */}
+                <VStack spacing={2} align="stretch">
+                  {/* Only showing the "Add Comment" button */}
+                  <Button
+                    colorScheme="blue"
+                    size="sm"
+                    mt={2}
+                    onClick={() => handleAddComment(post.id)}
+                    isLoading={setIsLoadingStates[post.id]}
+                  >
+                    Add Comment
+                  </Button>
+                </VStack>
+
+                {/* Read More button */}
+                <Button
+                  as={Link}
+                  to={`/post/${post.id}`}
+                  mt={2}
+                  size="sm"
+                  colorScheme="teal"
+                >
+                  Read More
+                </Button>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Box>
+      </div>
+
+      {/* Footer */}
+      <footer>
+        <Footer/>
+      </footer>
+    </div>
+  );
 }
 
 export default BlogsPage

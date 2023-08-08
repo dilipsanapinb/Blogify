@@ -9,8 +9,11 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { BiSearch } from "react-icons/bi"
 import { HamburgerIcon } from "@chakra-ui/icons";
-
+import { useToast } from "@chakra-ui/toast";
 const Navbar = () => {
+    const [searchInput, setSearchInput] = useState("");
+    const [posts, setPosts] = useState();
+    const toast = useToast();
     const [isSticky, setIsSticky] = useState(false);
     const handleScroll = () => {
         const scrollPosition = window.scrollY;
@@ -24,8 +27,40 @@ const Navbar = () => {
         };
     }, []);
 
-    
-const { isOpen, onOpen, onClose } = useDisclosure();
+    const handleSearch = async() => {
+        try {
+    const response = await fetch(`http://13.53.131.66:5000/post/api/searchposts/${searchInput}`);
+    const data = await response.json();
+    const result = data.AllPosts;
+    const formattedPosts = result.map((post) => ({
+      ...post,
+      formattedCreatedAt: formatDateTime(post.createdAt),
+    }));
+    setPosts(formattedPosts);
+  } catch (error) {
+    toast({
+      title: "Error at searching posts!",
+      description: error.response?.data?.message || "Something went wrong",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
+  }
+    }
+    const { isOpen, onOpen, onClose } = useDisclosure();
+     const formatDateTime = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    };
+    return dateTime.toLocaleString(undefined, options);
+  };
     return (
             <Flex
                 as='nav'
@@ -67,10 +102,12 @@ const { isOpen, onOpen, onClose } = useDisclosure();
                             placeholder='Search post by title'
                             borderRadius={'4px'}
                             bg={'white'}
-                            size="md"
+                        size="md"
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
                         ></Input>
                         <InputRightElement pointerEvents="none">
-            <BiSearch color="gray.500" />
+            <BiSearch color="gray.500" onClick={handleSearch} style={{ cursor: "pointer" }} />
           </InputRightElement>
                     </InputGroup>
                 </Flex>

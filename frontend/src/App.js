@@ -5,6 +5,8 @@ import LandingPage from './Pages/LandingPage';
 import SignInPage from './Pages/SignInPage';
 import BlogsPage from './Pages/BlogsPage';
 import CreatePost from './Pages/CreatePost';
+import FullPostDetails from './Pages/FullPostDetails';
+import EditPost from './Pages/EditPost';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/create-post" element={<CreatePost />} />
+          <Route path="/post/:id" element={<FullPostDetails />} />
+          <Route path="/edit-post/:id" element={<EditPost />} />
         </Routes>
       </Router>
     </div>
