@@ -1,0 +1,35 @@
+.posts-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.create-post-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.post-box {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-box {
+  background-color: #f7fafc;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.read-more-button {
+  margin-top: 1rem;
+}
+
+/* Additional styles for headings, text, buttons, etc. */
