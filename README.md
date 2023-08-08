@@ -9,6 +9,8 @@ Bogify is blogging app which help people to post their blogs online and other pe
 - GitHub
 - Postman
 
+## AWS Instance link
+- http://13.53.131.66:5000/
 #### blogifybackend repo link
 - https://github.com/dilipsanapinb/blogifybackend
 # Entities
