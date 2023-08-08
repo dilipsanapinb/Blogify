@@ -1,6 +1,7 @@
 // FullPostDetails.js
 import React, { useEffect, useState } from 'react';
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Box, Button, Heading, Text } from '@chakra-ui/react';
+import{useNavigate}from "react-router-dom"
 import { Link, NavLink } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import Footer from '../Components/Footer/Footer';
@@ -8,6 +9,8 @@ import Navbar from '../Components/Navbar/Navbar';
 const FullPostDetails = () => {
     const { id } = useParams(); // Get the "id" parameter from the URL
   const [post, setPost] = useState(null);
+  const navigate=useNavigate()
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   useEffect(() => {
     // Fetch the post data using the post ID
@@ -24,6 +27,32 @@ const FullPostDetails = () => {
 
     fetchPostDetails();
   }, [id]);
+
+  const handleDeleteConfirmation = () => {
+    setIsConfirmationOpen(true);
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      const response = await fetch(`http://13.53.131.66:5000/post/api/post/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setIsConfirmationOpen(false);
+        navigate('/blogs');
+        
+      } else {
+        throw new Error('Failed to delete post');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setIsConfirmationOpen(false);
+  };
+
    
     return (
         <div>
@@ -44,7 +73,7 @@ const FullPostDetails = () => {
             <Button as={Link} to={`/edit-post/${post?.id}`} colorScheme="teal" size="sm" mr={2}>
               Edit
             </Button>
-            <Button colorScheme="red" size="sm">
+            <Button colorScheme="red" size="sm" onClick={handleDeleteConfirmation}>
               Delete
             </Button>
           </Box>
@@ -60,7 +89,25 @@ const FullPostDetails = () => {
             ))}
           </Box>
         </Box>
-      </main>
+        </main>
+         <AlertDialog isOpen={isConfirmationOpen} leastDestructiveRef={undefined}>
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Delete Post
+            </AlertDialogHeader>
+            <AlertDialogBody>
+              Are you sure you want to delete this post? This action cannot be undone.
+            </AlertDialogBody>
+            <AlertDialogFooter>
+              <Button onClick={handleCancelDelete}>Cancel</Button>
+              <Button colorScheme="red" onClick={handleDeletePost} ml={3}>
+                Delete
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
       <footer>
         <Footer />
       </footer>

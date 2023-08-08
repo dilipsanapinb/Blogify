@@ -11,13 +11,13 @@ import {
 import { useParams } from 'react-router-dom';
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
-
+ import { useNavigate } from "react-router-dom";
 const EditPost = () => {
   const { id } = useParams();
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
   const toast = useToast();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
@@ -45,24 +45,26 @@ const EditPost = () => {
         },
         body: JSON.stringify({ title: postTitle, content: postContent }),
       });
-      if (response.ok) {
-        toast({
-          title: 'Post updated successfully!',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        });
-      } else {
-        throw new Error('Failed to update post');
-      }
+      navigate("/blogs")
+      // if (response.ok) {
+      //   toast({
+      //     title: 'Post updated successfully!',
+      //     status: 'success',
+      //     duration: 3000,
+      //     isClosable: true,
+      //   });
+      // } else {
+      //   throw new Error('Failed to update post');
+      // }
     } catch (error) {
-      toast({
-        title: 'Error updating post!',
-        description: error.message,
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      });
+      // toast({
+      //   title: 'Error updating post!',
+      //   description: error.message,
+      //   status: 'error',
+      //   duration: 3000,
+      //   isClosable: true,
+      // });
+      console.log(error);
     }
   };
 
